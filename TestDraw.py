@@ -11,16 +11,19 @@ def DrawShapeOntoImage(img):
     possibleShapes = [1, 2]
     possibleLabels = [1, 2]
 
+    # start and end coordinates of Rectangle
+    x1Start = random.choice(range(30, 1920 - 460))
+    y1Start = random.choice(range(30, 1080 - 460))
+    x2End = x1Start + random.choice(range(30, 60))
+    y2End = y1Start + random.choice(range(30, 60))
 
-    # start coordinate
-    x1 = random.choice(range(20, 620))
-    y1 = random.choice(range(20, 460))
-    # end coordinate
-    x2 = x1 + random.choice(range(30, 100))
-    y2 = y1 + random.choice(range(30, 100))
+    # circle start coordinate
+    x1CircStart = random.choice(range(35, 1020))
+    y1CircStart = random.choice(range(35, 1020))
+
 
     # Circle radius
-    radius = random.choice(range(10, 75))
+    radius = random.choice(range(15, 30))
     # Font type
     font = cv2.FONT_HERSHEY_SIMPLEX
     fontthic = 2
@@ -51,18 +54,18 @@ def DrawShapeOntoImage(img):
 
     if shape == 1:
         # get coords based on boundary
-        rect_center = ((x1 + x2) // 2, (y1 + y2) // 2)
+        rect_center = ((x1Start + x2End) // 2, (y1Start + y2End) // 2)
         textX = (rect_center[0] - (textwidth // 2))
         textY = (rect_center[1] + (textheight // 2))
 
-        img = cv2.rectangle(img, (x1, y1), (x2, y2), (b, g, r), -1)
+        img = cv2.rectangle(img, (x1Start, y1Start), (x2End, y2End), (b, g, r), -1)
         img = cv2.putText(img, label, (textX, textY), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (b1, g1, r1), fontthic)
 
     else:
-        textX = (x1 - (textwidth // 2))
-        textY = (y1 + (textheight // 2))
+        textX = (x1CircStart - (textwidth // 2))
+        textY = (y1CircStart + (textheight // 2))
 
-        img = cv2.circle(img, (x1, y1), radius, (b, g, r), -1)
+        img = cv2.circle(img, (x1CircStart, y1CircStart), radius, (b, g, r), -1)
         img = cv2.putText(img, label, (textX, textY), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (b1, g1, r1), fontthic)
 
 
