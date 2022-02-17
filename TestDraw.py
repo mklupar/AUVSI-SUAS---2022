@@ -9,8 +9,8 @@ import numpy as np
 
 def DrawShapeOntoImage(img):
     # Shape choose setup
-    possibleShapes = [4]  # [i for i in range(1, 14)]  # list 1 - 13 for all shapes
-    possibleLabels = [1, 2]
+    possibleShapes = [4] # [i for i in range(1, 14)]  # list 1 - 13 for all shapes
+    possibleLabels = [1, 2]  # Letter or Number pick
 
     # start and end coordinates of Shapes
     x1Start = random.choice(range(30, 1920 - 65))
@@ -121,7 +121,7 @@ def DrawShapeOntoImage(img):
 
 
 if __name__ == '__main__':
-    path = r'D:\Pycharm Projects\Pycharm Data Processing\Fields\grass_field2.jpg'
+    path = r'D:\Pycharm Projects\Pycharm Data Processing\Fields\Grass_Field.jpg'
     img = cv2.imread(path)
     img = cv2.resize(img, (1920, 1080))
 
