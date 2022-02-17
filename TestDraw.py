@@ -52,13 +52,12 @@ def DrawShapeOntoImage(img):
     g = random.choice(range(0, 255))
     r = random.choice(range(0, 255))
 
-    def PlaceText(ShapeCenter, img):
+    def PlaceText(ShapeCenter, img):  # Places text at the center of the shape
         textX = (ShapeCenter[0] - (textwidth // 2))
         textY = (ShapeCenter[1] + (textheight // 2))
         img = cv2.putText(img, label, (textX, textY), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (b1, g1, r1), fontthic)
 
     if shape == 1:  # Rectangle
-        # get coords based on boundary
         img = cv2.rectangle(img, (x1Start, y1Start), (x2End, y2End), (b, g, r), -1)
         rect_center = ((x1Start + x2End) // 2, (y1Start + y2End) // 2)
         PlaceText(rect_center, img)
@@ -71,7 +70,6 @@ def DrawShapeOntoImage(img):
         img = cv2.putText(img, label, (textX, textY), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (b1, g1, r1), fontthic)
 
     elif shape == 3:  # Trapezoid
-
         contour = np.array(
             [[x1Start, y1Start], [x1Start + 20, y1Start], [x1Start - 10, y1Start + 30], [x1Start + 30, y1Start + 30],
              [x1Start, y1Start], [x1Start - 10, y1Start + 30], [x1Start + 20, y1Start],
@@ -97,6 +95,23 @@ def DrawShapeOntoImage(img):
         cv2.fillPoly(img, [contour], (b, g, r))  # fills in the shape.
         hex_center = (x1Start + 18, y1Start + 18)
         PlaceText(hex_center, img)
+
+    elif shape == 6:  # triangle
+        pass
+    elif shape == 7:  # semi circle
+        pass
+    elif shape == 8:  # quarter circle
+        pass
+    elif shape == 9:  # square
+        pass
+    elif shape == 10:  # heptagon
+        pass
+    elif shape == 11:  # octagon
+        pass
+    elif shape == 12:  # star
+        pass
+    elif shape == 13:  # cross
+        pass
 
         # placing text at the center of the shape
 
