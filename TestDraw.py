@@ -9,7 +9,7 @@ import numpy as np
 
 def DrawShapeOntoImage(img):
     # Shape choose setup
-    possibleShapes = [4] # [i for i in range(1, 14)]  # list 1 - 13 for all shapes
+    possibleShapes = [i for i in range(1, 14)]  # list 1 - 13 for all shapes
     possibleLabels = [1, 2]  # Letter or Number pick
 
     # start and end coordinates of Shapes
