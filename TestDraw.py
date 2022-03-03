@@ -2,14 +2,13 @@
 import random
 import cv2
 import string
-import os
 import time
 import numpy as np
 
 
 def DrawShapeOntoImage(img):
     # Shape choose setup
-    possibleShapes = [i for i in range(1, 14)]  # list 1 - 13 for all shapes
+    possibleShapes = [6]  # [i for i in range(1, 14)]  # list 1 - 13 for all shapes
     possibleLabels = [1, 2]  # Letter or Number pick
 
     # start and end coordinates of Shapes
@@ -26,8 +25,7 @@ def DrawShapeOntoImage(img):
     radius = random.choice(range(15, 30))
     # Font type
     font = cv2.FONT_HERSHEY_SIMPLEX
-    fontthic = 2
-    shapethic = 2
+    fontthic = 1
     # Draw Shape
     # Text inside shape
     textType = random.choice(possibleLabels)
@@ -91,27 +89,64 @@ def DrawShapeOntoImage(img):
 
     elif shape == 5:  # Hexagon
         contour = np.array([[x1Start, y1Start], [x1Start + 36, y1Start], [x1Start + 54, y1Start + 18],
-                            [x1Start + 36, y1Start + 36], [x1Start, y1Start + 36], [x1Start - 18, y1Start + 18]], np.int32)
+                            [x1Start + 36, y1Start + 36], [x1Start, y1Start + 36], [x1Start - 18, y1Start + 18]],
+                           np.int32)
         cv2.fillPoly(img, [contour], (b, g, r))  # fills in the shape.
         hex_center = (x1Start + 18, y1Start + 18)
         PlaceText(hex_center, img)
 
     elif shape == 6:  # triangle
-        pass
+        contour = np.array([[x1Start, y1Start], [x1Start + 50, y1Start], [x1Start + 25, y1Start - 35]], np.int32)
+        cv2.fillPoly(img, [contour], (b, g, r))
+        tri_center = (x1Start + 26, y1Start - 15)
+        PlaceText(tri_center, img)
+
     elif shape == 7:  # semi circle
-        pass
+        img = cv2.ellipse(img, (x1Start, y1Start), (30, 30), 0, 270, 450, (b, g, r), -1)
+        semi_center = (x1Start + 15, y1Start)
+        PlaceText(semi_center, img)
+
     elif shape == 8:  # quarter circle
-        pass
+        img = cv2.ellipse(img, (x1Start, y1Start), (40, 40), 0, 0, 90, (b, g, r), -1)
+        quarter_center = (x1Start + 17, y1Start + 15)
+        PlaceText(quarter_center, img)
+
     elif shape == 9:  # square
-        pass
+        cv2.rectangle(img, (x1Start, y1Start), (x1Start + 40, y1Start + 40), (b, g, r), -1)
+        square_center = (x1Start + 21, y1Start + 20)
+        PlaceText(square_center, img)
     elif shape == 10:  # heptagon
-        pass
+        contour = np.array([[x1Start, y1Start], [x1Start + 15, y1Start + 10], [x1Start + 22, y1Start + 30],
+                            [x1Start + 10, y1Start + 44],
+                            [x1Start - 10, y1Start + 44], [x1Start - 22, y1Start + 30], [x1Start - 15, y1Start + 10]],
+                           np.int32)
+        cv2.fillPoly(img, [contour], (b, g, r))  # fills in the shape.
+        hep_center = (x1Start, y1Start + 20)
+        PlaceText(hep_center, img)
     elif shape == 11:  # octagon
-        pass
+        contour = np.array([[x1Start + 15, y1Start], [x1Start + 30, y1Start + 15], [x1Start + 30, y1Start + 45],
+                            [x1Start + 15, y1Start + 60],
+                            [x1Start - 15, y1Start + 60], [x1Start - 30, y1Start + 45], [x1Start - 30, y1Start + 15],
+                            [x1Start - 15, y1Start]], np.int32)
+
+        cv2.fillPoly(img, [contour], (b, g, r))  # fills in the shape.
+        oct_center = (x1Start, y1Start + 30)
+        PlaceText(oct_center, img)
     elif shape == 12:  # star
-        pass
+        contour = np.array([[x1Start, y1Start], [x1Start + 52, y1Start], [x1Start + 9, y1Start + 26],
+                            [x1Start + 26, y1Start - 17], [x1Start + 52, y1Start + 26], [x1Start, y1Start]], np.int32)
+        contour2 = np.array([[x1Start, y1Start], [x1Start + 52, y1Start], [x1Start + 30, y1Start + 15],
+                             [x1Start, y1Start]], np.int32)
+
+        cv2.fillPoly(img, [contour], (b, g, r))  # fills in the shape.
+        cv2.fillPoly(img, [contour2], (b, g, r))  # fills rest of the shape
+        star_center = (x1Start + 29, y1Start + 4)
+        PlaceText(star_center, img)
     elif shape == 13:  # cross
-        pass
+        img = cv2.rectangle(img, (x1Start, y1Start), (x1Start + 20, y1Start + 50), (b, g, r), -1)
+        img = cv2.rectangle(img, (x1Start - 20, y1Start + 20), (x1Start + 40, y1Start + 33), (b, g, r), -1)
+        rect_center = (x1Start + 12, y1Start + 25)
+        PlaceText(rect_center, img)
 
         # placing text at the center of the shape
 
